@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
-cp . /usr/local/bin
+COPY . /usr/local/bin
 RUN make
+EXPOSE 3000
 CMD /usr/local/bin/youapp
