@@ -1,16 +1,15 @@
 
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y \
-    make \
-    curl \
-    unzip \
-    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install
+# Copy the current directory contents into /usr/local/bin in the container
+COPY . /usr/local/bin
 
+# Set the working directory to /usr/local/bin
+WORKDIR /usr/local/bin
 
-ENV AWS_ACCESS_KEY_ID=your-access-key
-ENV AWS_SECRET_ACCESS_KEY=your-secret-key
-ENV AWS_DEFAULT_REGION=your-region
+# Run the build process
+RUN make
+
+# Set the command to run your application
+CMD ["./yourapp"]
 
